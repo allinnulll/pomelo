@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>事件流</title>
+	<style>
+		html, body, div{
+			width: 100%;
+			height: 100%;
+			padding: 30px;
+		}
+		div{
+			box-sizing: border-box;
+		}
+		#a{
+			background-color: #eee;
+		}
+		#b{
+			background-color: #ddd;
+		}
+		#c{
+			background-color: #ccc;
+		}
+		#d{
+			background-color: #bbb;
+		}
+		#e{
+			background-color: #aaa;
+		}
+		#f{
+			background-color: #999;
+		}
+	</style>
+</head>
+<body>
+	<div id="a">a
+		<div id="b">b
+			<div id="c">c
+				<div id="d">d
+					<div id="e">e
+						<div id="f">f</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		window.onload = function(){
+			// 事件流有三个阶段
+			/* 
+				* 捕获阶段 由外（window）向内捕获事件对象
+				* 目标阶段 到达目标事件位置（事件触发的dom,target），触发事件
+				* 冒泡阶段 从目标事件位置向根节点回溯
+			 */
+			// window上currentTarget指向window对象,不同于一般的dom对象
+			// addEventListener第三个参数表示在哪个阶段触发，true为捕获阶段，false为冒泡阶段，默认false
+			window.addEventListener('click', function(e){
+				console.log('window', e.target.getAttribute('id'), e.currentTarget);
+			},true)
+			// addEventListener绑定几次就触发几次
+			document.querySelector('#a').addEventListener('click', function(e){
+				console.log('a', e.target.getAttribute('id'), e.currentTarget.getAttribute('id'));
+			})
+			document.querySelector('#a').addEventListener('click', function(e){
+				console.log('a', e.target.getAttribute('id'), e.currentTarget.getAttribute('id'));
+			},true)
+
+			document.querySelector('#b').addEventListener('click', function(e){
+				console.log('b', e.target.getAttribute('id'), e.currentTarget.getAttribute('id'));
+			})
+			document.querySelector('#c').addEventListener('click', function(e){
+				console.log('c', e.target.getAttribute('id'), e.currentTarget.getAttribute('id'));
+			})
+			document.querySelector('#d').addEventListener('click', function(e){
+				console.log('d', e.target.getAttribute('id'), e.currentTarget.getAttribute('id'));
+			}, true)
+			document.querySelector('#e').addEventListener('click', function(e){
+				console.log('e', e.target.getAttribute('id'), e.currentTarget.getAttribute('id'));
+			})
+			document.querySelector('#f').addEventListener('click', function(e){
+				console.log('f', e.target.getAttribute('id'), e.currentTarget.getAttribute('id'));
+			})
+		}
+	</script>
+</body>
+</html>

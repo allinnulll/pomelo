@@ -16,6 +16,7 @@
 				return function(){
 					var that = this, args = arguments, nDate = new Date - 0;
 					clearTimeout(timer);
+					// 间隔时间内比执行一次
 					if(nDate - cDate >= delay){
 						callback.apply(that, args);
 						cDate = nDate;
