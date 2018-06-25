@@ -3,3 +3,4 @@
 #### 已有
 * debounce 防抖
 * throttle 节流
+* 事件流
