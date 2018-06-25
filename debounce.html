@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Debounce 函数防抖</title>
+</head>
+<body>
+	<input type="text" id="tel" style="width: 80%; height: 30px; border: 1px solid #ddd">
+	<script>
+		// debounce
+		function debounce (callback, delay){
+			var timer = '';
+			return function(e){
+				var that = this, args = arguments;
+				delay = delay || 380;
+				clearTimeout(timer);
+				timer = setTimeout(function(){
+					// 定义this指向和传入参数，不然callback指向到window
+					callback.apply(that, args);
+				}, delay)
+			}
+		}
+		window.onload = function(){
+			document.querySelector('#tel').addEventListener('input', debounce(function(e){
+				console.log(this);
+				console.log('callback'+e.target.value);
+			}, 500));
+		}
+	</script>
+</body>
+</html>
