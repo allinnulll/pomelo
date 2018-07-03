@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.m-layout{
+    padding-top: 44px;
+}
+header{
+    position: fixed;
+    top: 0;
+    height: 44px;
+    width: 100%;
+    background-color: #0ff;
+}
+div.s{
+    height: 100px;
+    background-color: #777;
+}
+div.b{
+    background-color: #999;
+}
+div.c{
+    background-color: #bbb;
+}
+
+@media only screen and (min-device-width:480px){
+    div.s{
+        float: left;
+        width: 50%;
+    }
+}
+
+@media only screen and (min-device-width:960px){
+    div.s{
+        float: left;
+        width: 33.33%;
+    }
+}
