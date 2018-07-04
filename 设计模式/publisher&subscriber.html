@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>publisher/subscriber</title>
+</head>
+<body>
+    <input type="number" id="num">
+    <h3 id="h3"></h3>
+    <script>
+        // 事件处理中心
+        function EventChannel(){
+            this.events = {};
+            this.uid = 0;
+        }
+        EventChannel.prototype.subscribe = function(eventName, handler, that){
+            this.events[eventName] = this.events[eventName] || [];
+            this.events[eventName].push({
+                taskId: (++this.uid).toString(),
+                handler: handler,
+                that: that
+            });
+            return;
+        }
+        EventChannel.prototype.publish = function(eventName, data){
+            if(!this.events[eventName] || !this.events[eventName].length) return false;
+            this.events[eventName].map(s=>s.handler.call(s.that, data));
+        }
+        // 实例
+        let eventChannel = new EventChannel();
+        /* function Bind(){
+
+        } */
+        // api封装
+        function $(dom){
+            if(!dom) return;
+            dom['trigger'] = function(eventName, data){
+                eventChannel.publish(eventName, data);
+            };
+            dom['on'] = function(eventName, callback){
+                eventChannel.subscribe(eventName, callback, this);
+            }
+            return dom;
+        }
+        
+        let ipt = $(document.querySelector('#num')),
+            h3 = $(document.querySelector('#h3'));
+        ipt.addEventListener('input', function(){
+            if(this.value == '123456') {
+                this.trigger('tel', this.value);
+            }
+        });
+        h3.on('tel', function(data){
+            this.innerHTML = '触发了"tel"事件'+ data;
+        })
+    </script>
+</body>
+</html>

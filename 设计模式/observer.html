@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Observer</title>
+</head>
+<body>
+    <input type="text" name="txt" id="txt">
+    <p id="a"></p>
+    <p id="b"></p>
+    <p id="c"></p>
+    <script>
+        window.onload = function(){
+            function Data(){
+                this.data = '';
+                this.obs = [];
+            }
+            // 设置值
+            Data.prototype.set = function(value){
+                if(this.data === value) return;
+                this.data = value;
+                // 通知改变
+                if(!this.obs.length) return;
+                this.obs.map(obs=>obs.change(this.get()));
+            }
+            Data.prototype.get = function(){
+                return this.data;
+            }
+            // 添加观察者
+            Data.prototype.addListener = function(observer){
+                this.obs.push(...observer);
+                console.log(this.obs)
+            }
+            // 删除观察者
+            Data.prototype.removeListener = function(observer){
+                let l = this.obs.length,i = 0;
+                while(i < l){
+                    if(this.obs[i] === observer) {
+                        this.obs.splice(i, 1);
+                        break;
+                    }
+                    i++;
+                }
+            }
+
+
+            let data = new Data();
+            let ipt = document.querySelector('#txt'),
+                a = document.querySelector('#a'),
+                b = document.querySelector('#b'),
+                c = document.querySelector('#c');
+            // 观察者对象
+            let observer1 = {
+                change: function(data){
+                    a.innerHTML = data;
+                }
+            }
+            let observer2 = {
+                change: function(data){
+                    b.innerHTML = data;
+                }
+            }
+            let observer3 = {
+                change: function(data){
+                    c.innerHTML = data;
+                }
+            }
+            // 添加观察者
+            data.addListener([observer1, observer2, observer3]);
+
+            ipt.addEventListener('input', function(){
+                data.set(this.value)
+            })
+        }
+    </script>
+</body>
+</html>
