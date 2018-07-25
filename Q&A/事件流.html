@@ -54,6 +54,7 @@
 				* 目标阶段 到达目标事件位置（事件触发的dom,target），触发事件
 				* 冒泡阶段 从目标事件位置向根节点回溯
 			 */
+			// e.target为触发事件的对象，e.currentTarget为绑定事件回调函数的对象
 			// window上currentTarget指向window对象,不同于一般的dom对象
 			// addEventListener第三个参数表示在哪个阶段触发，true为捕获阶段，false为冒泡阶段，默认false
 			window.addEventListener('click', function(e){
