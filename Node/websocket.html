@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>websocket</title>
+</head>
+<body>
+    <button id="connect">连接</button>
+    <button id="send">发送</button>
+    <script>
+        window.onload = function() {
+            let ws = null;
+            document.getElementById('connect').addEventListener('click', function(){
+                ws = new WebSocket('ws://127.0.0.1:8090');
+                ws.onopen = function(evt) { 
+                    console.log("Connection open ..."); 
+                    ws.send("Hello WebSockets!");
+                };
+
+                ws.onmessage = function(evt) {
+                    console.log( "Received Message: " + evt.data);
+                    ws.close();
+                };
+
+                ws.onclose = function(evt) {
+                    console.log("Connection closed.");
+                }; 
+            });
+            document.getElementById('send').addEventListener('click', function(){
+                
+            });
+        }
+    </script>
+</body>
+</html>
