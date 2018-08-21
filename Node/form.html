@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .m-equities-item-link {
+            width: 100px; 
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <script src="http://127.0.0.1:8867/a.json"></script>
+    <!-- <div class="m-equities-item-link bay-record">
+        <span>购买记录</span>
+        <i class="u-icon-rightArrow"></i>
+    </div>
+    <button onclick="get1()">提交1</button>
+    <button onclick="get({url: 'https://m.lvmama.com/webapp/my/superMember/purchaseHistory/',data: {word:132,b:'asd'}})">提交</button> -->
+    <script>
+     /*    function get1 (){
+            var aForm = document.createElement('form');
+            aForm.setAttribute('action', 'https://www.baidu.com/?');
+            aForm.setAttribute('method', 'GET');
+            aForm.setAttribute('target', '_self');
+            aForm.setAttribute('style', 'display: none');
+            document.querySelector('body').appendChild(aForm);
+            aForm.submit();
+        }
+        function get (params){
+            
+            let aForm = document.createElement('form');
+            aForm.setAttribute('action', params.url);
+            aForm.setAttribute('method', 'GET');
+            aForm.setAttribute('target', '_self');
+            aForm.setAttribute('style', 'display: none');
+            if(params.data){
+                for(let key in params.data){
+                    let ipt = document.createElement('input');
+                    ipt.name = key;
+                    ipt.value = params.data[key];
+                    aForm.appendChild(ipt);
+                }
+            }
+            document.querySelector('body').appendChild(aForm);
+            aForm.submit();
+        }
+     */
+    </script>
+    <script>
+        /* document.querySelector('.m-equities-item-link').addEventListener('click', function(){
+            Go('https://m.lvmama.com/webapp/my/superMember/purchaseHistory/');
+        });
+        var Go = function(data) {
+            let params = null;
+            if(typeof data === 'string') {
+                params = {url: data};
+            } else {
+                params = data;
+            }
+            if (!data || !params.url) return;
+            // 追加协议
+            if (params.url.indexOf('http') == -1 && params.url.indexOf('https') == -1 ) {
+                params.url = 'https://' + params.url;
+            }
+            let aForm = document.createElement('form');
+            aForm.style = 'display: none';
+            aForm.action = params.url;
+            aForm.method = 'get';
+            aForm.target = '_self';
+            if(params.data){
+                for(let key in params.data){
+                    let ipt = document.createElement('input');
+                    ipt.name = key;
+                    ipt.value = params.data[key];
+                    aForm.appendChild(ipt);
+                }
+            }
+            document.querySelector('body').appendChild(aForm);
+            aForm.submit(); 
+        }*/
+    </script>
+</body>
+</html>
