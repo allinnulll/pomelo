@@ -2,8 +2,10 @@ const http = require('http');
 const fs = require('fs');
 const crypto = require('crypto');
 
+let time = 0;
+
 const server = http.createServer((req, res) => {
-    console.log(1);
+    console.log(++time);
     comparisonHandle(req, res);
 });
 

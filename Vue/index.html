@@ -11,7 +11,14 @@
     <div id="app">{{a}}</div>
     <script>
         Vue.config.performance = true;
-        var myVm = new Vue({
+        Vue.config.optionMergeStrategies.customOptions = function (parentVal, childVal) {
+            return parentVal ? (parentVal + childVal) : childVal
+        }
+        const Sub = Vue.extend({
+            customOptions: 3
+        });
+        var myVm = new Sub({
+            customOptions: 5,
             props: ['bb'],
             el: '#app',
             data: function(){
